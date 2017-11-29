@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace NetMessaging
 {
-    public class Class1
+    public class Message
     {
+
     }
 }
