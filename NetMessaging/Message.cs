@@ -8,6 +8,6 @@ namespace NetMessaging
 {
     public class Message
     {
-
+        int Length;
     }
 }
