@@ -8,6 +8,25 @@ namespace NetMessaging
 {
     public class Message
     {
-        int Length;
+        public enum MessageType
+        {
+            Service,
+            Info,
+            Link
+        }
+        public MessageHeader Header;
+        public byte[] Payload;
+        public virtual void Unpack()
+        {
+
+        }
+        public virtual void Pack()
+        {
+
+        }
+        public byte[] GetBytes()
+        {
+
+        }
     }
 }
