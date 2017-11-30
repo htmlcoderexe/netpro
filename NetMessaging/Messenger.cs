@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
+using System.Collections.Concurrent;
 
 namespace NetMessaging
 {
@@ -13,8 +14,9 @@ namespace NetMessaging
         public Guid ID;
         public Dictionary<Guid, IPAddress> NetworkMap;
         public Dictionary<Guid, short> LocalMap;
-        public Queue<Message> Inbox;
-        public Queue<Message> Outbox;
+        public ConcurrentQueue<Message> Inbox;
+        public ConcurrentQueue<Message> Outbox;
+        public Action<Message> ProcessMessage;
 
         private System.Threading.Thread InboxThread;
         private System.Threading.Thread OutboxThread;
@@ -25,8 +27,8 @@ namespace NetMessaging
             OutboxThread = new System.Threading.Thread(ProcessOutbox);
             LocalMap = new Dictionary<Guid, short>();
             NetworkMap = new Dictionary<Guid, IPAddress>();
-            Inbox = new Queue<Message>();
-            Outbox = new Queue<Message>();
+            Inbox  = new ConcurrentQueue<Message>();
+            Outbox = new ConcurrentQueue<Message>();
         }
 
         public void Start()
@@ -67,12 +69,29 @@ namespace NetMessaging
 
         private void ProcessInbox()
         {
-
+            while(true)
+            {
+                Message CurrentMessage;
+                while(Inbox.TryDequeue(out CurrentMessage))
+                {
+                    if (CurrentMessage.Header.Type == (byte)Message.MessageType.Control)
+                        ProcessControlMessage(CurrentMessage);
+                    else
+                        ProcessMessage?.Invoke(CurrentMessage);
+                }
+                System.Threading.Thread.Sleep(10);
+            }
         }
         private void ProcessOutbox()
         {
 
         }
+
+        public void ProcessControlMessage(Message Message)
+        {
+
+        }
+        
 
         public void Transmit(Message Message, short Port, IPAddress IP)
         {

@@ -10,6 +10,7 @@ namespace NetMessaging
     {
         public enum MessageType
         {
+            Control,
             Service,
             Info,
             Link
