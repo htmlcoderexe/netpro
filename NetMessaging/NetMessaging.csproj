@@ -43,6 +43,7 @@
     <Compile Include="MessageHeader.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Messenger.cs" />
+    <Compile Include="OperationConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
