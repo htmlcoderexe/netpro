@@ -12,15 +12,18 @@ namespace NetMessaging
     {
         public IPAddress BoundIP;
         public Guid ID;
-        public Dictionary<Guid, IPAddress> NetworkMap;
-        public Dictionary<Guid, short> LocalMap;
-        public ConcurrentQueue<Message> Inbox;
-        public ConcurrentQueue<Message> Outbox;
-        public Action<Message> ProcessMessage;
+        private Dictionary<Guid, IPAddress> NetworkMap;
+        private Dictionary<Guid, short> LocalMap;
+        private ConcurrentQueue<Message> Inbox;
+        private ConcurrentQueue<Message> Outbox;
+        private Action<Message> ProcessMessage;
 
         private System.Threading.Thread InboxThread;
         private System.Threading.Thread OutboxThread;
 
+        /// <summary>
+        /// Initializes a new Messenger instance.
+        /// </summary>
         public Messenger()
         {
             InboxThread = new System.Threading.Thread(ProcessInbox);
@@ -30,19 +33,26 @@ namespace NetMessaging
             Inbox  = new ConcurrentQueue<Message>();
             Outbox = new ConcurrentQueue<Message>();
         }
-
+        /// <summary>
+        /// Begin listening for incoming communications
+        /// </summary>
         public void Start()
         {
             InboxThread.Start();
             OutboxThread.Start();
         }
-
+        /// <summary>
+        /// Stop listening and cleanup threads.
+        /// </summary>
         public void Stop()
         {
             InboxThread.Abort();
             OutboxThread.Abort();
         }
-
+        /// <summary>
+        /// Send a message
+        /// </summary>
+        /// <param name="Message">A message to send</param>
         public void Send(Message Message)
         {
             //message to self
@@ -87,13 +97,13 @@ namespace NetMessaging
 
         }
 
-        public void ProcessControlMessage(Message Message)
+        private void ProcessControlMessage(Message Message)
         {
 
         }
         
 
-        public void Transmit(Message Message, short Port, IPAddress IP)
+        private void Transmit(Message Message, short Port, IPAddress IP)
         {
 
         }
