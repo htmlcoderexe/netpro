@@ -8,9 +8,13 @@ using System.Collections.Concurrent;
 
 namespace NetMessaging
 {
+    /// <summary>
+    /// The Messenger allows communication between hosts and services.
+    /// </summary>
     public class Messenger
     {
         public IPAddress BoundIP;
+        public short BoundPort;
         public Guid ID;
         private Dictionary<Guid, IPAddress> NetworkMap;
         private Dictionary<Guid, short> LocalMap;
