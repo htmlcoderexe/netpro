@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace Dispatcher
 {
-    public class DispatcherService : NetMessaging.Service
-    {
+    public class DispatcherService : Service.Service
+    { 
         public DispatcherService() : base()
         {
             this.Messenger.BoundPort = NetMessaging.OperationConstants.DispatcherPort;
+        }
+
+        public void RegisterHost()
+        {
+
         }
     }
 }

@@ -81,6 +81,11 @@ namespace NetMessaging
             Outbox.Enqueue(Message);
         }
 
+        public void Broadcast(Message Message)
+        {
+
+        }
+
         private void ProcessInbox()
         {
             while(true)
@@ -111,5 +116,6 @@ namespace NetMessaging
         {
 
         }
+
     }
 }

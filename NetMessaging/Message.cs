@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetMessaging
 {
-    public class Message
+    public abstract class Message
     {
         public enum MessageType
         {
@@ -21,16 +21,14 @@ namespace NetMessaging
         {
 
         }
-        public virtual void Pack()
-        {
-
-        }
+        public abstract void Pack();
         public byte[] GetBytes()
         {
             byte[] header = Header.GetBytes();
             int fulllength = MessageHeader.Size + Payload.Length;
             byte[] result = new byte[fulllength];
             Array.Copy(header, 0, result, 0, MessageHeader.Size);
+            this.Pack();
             Array.Copy(Payload, 0, result, MessageHeader.Size, Payload.Length);
             return result;
         }
