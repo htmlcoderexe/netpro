@@ -60,7 +60,6 @@ namespace NetMessaging
             c.Connect(IPAddress.Loopback, OperationConstants.DispatcherPort);
             result = (short)(c.Client.LocalEndPoint as IPEndPoint).Port;
             c.Close();
-            c.Dispose();
             return result;
         }
         /// <summary>
@@ -100,7 +99,8 @@ namespace NetMessaging
         {
             while(true)
             {
-                while (Inbox.TryDequeue(out Message CurrentMessage))
+                Message CurrentMessage;
+                while (Inbox.TryDequeue(out CurrentMessage))
                 {
                     if (CurrentMessage.Header.Type == (byte)Message.MessageType.Control)
                         ProcessControlMessage(CurrentMessage);
