@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Messages\RequestResourceStatus.cs" />
+    <Compile Include="Messages\ResourceStatus.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -49,6 +50,10 @@
     <ProjectReference Include="..\NetMessaging\NetMessaging.csproj">
       <Project>{6510e9a3-7a37-4c12-9c4f-dfd2455c3f97}</Project>
       <Name>NetMessaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{13ea46bf-6d95-4130-883e-1295a7de210c}</Project>
+      <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

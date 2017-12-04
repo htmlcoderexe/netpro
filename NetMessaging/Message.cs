@@ -21,14 +21,14 @@ namespace NetMessaging
         {
 
         }
-        public abstract void Pack();
+        public abstract byte[] Pack();
         public byte[] GetBytes()
         {
             byte[] header = Header.GetBytes();
             int fulllength = MessageHeader.Size + Payload.Length;
             byte[] result = new byte[fulllength];
             Array.Copy(header, 0, result, 0, MessageHeader.Size);
-            this.Pack();
+            this.Payload=this.Pack();
             Array.Copy(Payload, 0, result, MessageHeader.Size, Payload.Length);
             return result;
         }

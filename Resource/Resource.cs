@@ -8,10 +8,12 @@ namespace Resource
 {
     public class Resource
     {
+        public Guid ID;
+        public string FriendlyName;
         public enum ResourceState
         {
             Unknown,
-            Unavailable,
+            Offline,
             Shared,
             Available,
             Used
@@ -29,5 +31,8 @@ namespace Resource
             Logger
         }
         public ResourceType Type;
+        public byte SubType;
+        public int Capacity;
+        public int MaxCapacity;
     }
 }
