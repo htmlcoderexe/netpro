@@ -15,7 +15,7 @@ namespace NetMessaging
         public Guid Source;
         public int Length;
         public long TimeStamp;
-        public const int Size= 46;
+        public const int Size= 1+1+16+16+4+8;
         public byte[] GetBytes()
         {
             byte[] result;

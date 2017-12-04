@@ -8,7 +8,8 @@ namespace Service
 {
     public class Messages
     {
-        public const int ResourceRequestStatus = 14; //for example!
-        public const int ResourceStatus = 15; 
+        public const byte RegisterService = 0;
+        public const byte ResourceRequestStatus = 14; //for example!
+        public const byte ResourceStatus = 15; 
     }
 }

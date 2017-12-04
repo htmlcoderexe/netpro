@@ -24,6 +24,8 @@ namespace NetMessaging
         public abstract byte[] Pack();
         public byte[] GetBytes()
         {
+            Header.Length = Payload.Length;
+            Header.TimeStamp = DateTime.UtcNow.ToFileTimeUtc();
             byte[] header = Header.GetBytes();
             int fulllength = MessageHeader.Size + Payload.Length;
             byte[] result = new byte[fulllength];

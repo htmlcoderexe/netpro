@@ -44,10 +44,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.cs" />
     <Compile Include="ServiceMessageSubtypes.cs" />
+    <Compile Include="ServiceMessages\RegisterService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ServiceMessages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\NetMessaging\NetMessaging.csproj">
       <Project>{6510e9a3-7a37-4c12-9c4f-dfd2455c3f97}</Project>

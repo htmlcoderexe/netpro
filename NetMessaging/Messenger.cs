@@ -20,7 +20,7 @@ namespace NetMessaging
         private Dictionary<Guid, short> LocalMap;
         private ConcurrentQueue<Message> Inbox;
         private ConcurrentQueue<Message> Outbox;
-        private Action<Message> ProcessMessage;
+        public Action<Message> ProcessMessage;
 
         private System.Threading.Thread InboxThread;
         private System.Threading.Thread OutboxThread;
@@ -52,6 +52,16 @@ namespace NetMessaging
         {
             InboxThread.Abort();
             OutboxThread.Abort();
+        }
+        public short GainPort()
+        {
+            short result;
+            System.Net.Sockets.TcpClient c = new System.Net.Sockets.TcpClient();
+            c.Connect(IPAddress.Loopback, OperationConstants.DispatcherPort);
+            result = (short)(c.Client.LocalEndPoint as IPEndPoint).Port;
+            c.Close();
+            c.Dispose();
+            return result;
         }
         /// <summary>
         /// Send a message
@@ -90,8 +100,7 @@ namespace NetMessaging
         {
             while(true)
             {
-                Message CurrentMessage;
-                while(Inbox.TryDequeue(out CurrentMessage))
+                while (Inbox.TryDequeue(out Message CurrentMessage))
                 {
                     if (CurrentMessage.Header.Type == (byte)Message.MessageType.Control)
                         ProcessControlMessage(CurrentMessage);
@@ -117,5 +126,6 @@ namespace NetMessaging
 
         }
 
+        
     }
 }
